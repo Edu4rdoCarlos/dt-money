@@ -4,6 +4,7 @@ import { InputRadio, Input, InputValue } from "@/components/primitives/Input";
 import { Option } from "@/components/primitives/Select";
 import { data } from "@/mock/info";
 import { ArrowCircleDown, ArrowCircleUp } from "@phosphor-icons/react";
+import { cn } from "@/utils/twMerge";
 
 interface TransactionProps {
   openDialog: boolean;
@@ -33,10 +34,11 @@ export const Transaction = ({ openDialog, onOpenDialog }: TransactionProps) => {
                 Entrada
               </div>
             }
-            value="debit"
-            id="debit"
+            value="credit"
+            id="credit"
             name="type"
-            checked={type === "debit"} // Marca como checked se o tipo for 'debit'
+            checked={type === "credit"}
+            className={cn(type === "credit" && "!bg-green-50")}
             onChange={handleRadioChange}
           />
           <InputRadio
@@ -46,10 +48,11 @@ export const Transaction = ({ openDialog, onOpenDialog }: TransactionProps) => {
                 Saída
               </div>
             }
-            value="credit"
-            id="credit"
+            value="debit"
+            id="debit"
             name="type"
-            checked={type === "credit"} // Marca como checked se o tipo for 'credit'
+            checked={type === "debit"}
+            className={cn(type === "debit" && "!bg-red-50")}
             onChange={handleRadioChange}
           />
         </div>

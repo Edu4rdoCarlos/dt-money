@@ -12,6 +12,8 @@ const inputVariants = tv({
   slots: {
     wrapper:
       "py-4 rounded text-sm bg-gray-200/40 border border-gray-200 w-full font-light px-5 focus:outline-accent-400/10",
+    radio:
+      "font-light text-sm py-4 rounded border border-gray-200 w-full px-5 cursor-pointer select-none",
   },
 });
 
@@ -34,18 +36,19 @@ export const InputValue = (props: CurrencyInputProps) => {
 };
 
 export const InputRadio = ({ label, ...rest }: InputRadioProps) => {
+  const { radio } = inputVariants();
   return (
     <div className="flex items-center">
       <input
         type="radio"
         id={rest.id}
-        className={cn("appearance-none", rest.className)}
         {...rest}
+        className="appearance-none hidden"
       />
       <label
         htmlFor={rest.id}
         className={cn(
-          "font-light text-sm py-4 rounded border border-gray-200 w-full px-5 cursor-pointer select-none",
+          radio({ className: rest.className }),
           rest.checked && "bg-gray-100 font-medium"
         )}
       >
