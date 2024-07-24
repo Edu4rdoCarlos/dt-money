@@ -26,7 +26,7 @@ const calculateBilling = () => {
 export const Info = () => {
   const { credit, debit, total } = calculateBilling();
   return (
-    <div className="grid grid-cols-3 gap-6 items-center -mt-14">
+    <div className="grid grid-cols-3 gap-6 items-center -mt-16">
       <Container
         title={"Entradas"}
         value={credit}
