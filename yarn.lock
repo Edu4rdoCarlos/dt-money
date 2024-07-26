@@ -2694,6 +2694,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-media@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/use-media/-/use-media-1.5.0.tgz#7d023f04ab6a016e73175508c44ae2a8baddaa28"
+  integrity sha512-gEKsAwpqeejjLXllfQLlktok4CX3cpsS0TChDR9VTl3xQ/231jWujjebnJrt+IH50RRO163JPvHVKBj+W+Weqg==
+
 util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"

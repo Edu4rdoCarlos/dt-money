@@ -31,7 +31,7 @@ const calculateBilling = (data: InfoDataResponse[]) => {
 export const Info = ({ data }: InfoProps) => {
   const { credit, debit, total } = calculateBilling(data);
   return (
-    <div className="grid grid-cols-3 gap-6 items-center -mt-16">
+    <div className="md:grid md:grid-cols-3 gap-6 items-center -mt-16 flex w-full overflow-x-auto md:p-0 px-6 pb-1">
       <Container
         title={"Entradas"}
         value={credit}
