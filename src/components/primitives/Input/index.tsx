@@ -1,11 +1,17 @@
 import { cn } from "@/utils/twMerge";
 import { InputHTMLAttributes, ReactNode, useEffect } from "react";
 import CurrencyInput from "react-currency-input-field";
-import { CurrencyInputProps } from "react-currency-input-field";
 import { tv } from "tailwind-variants";
 
 interface InputRadioProps extends InputHTMLAttributes<HTMLInputElement> {
   label: ReactNode;
+}
+
+interface CurrencyInputProps {
+  className?: string;
+  value?: string;
+  onChange?: (value: string | undefined) => void;
+  placeholder?: string;
 }
 
 const inputVariants = tv({
@@ -24,13 +30,23 @@ export const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
 
 export const InputValue = (props: CurrencyInputProps) => {
   const { wrapper } = inputVariants();
+
+  const handleValueChange = (value: string | undefined) => {
+    if (props.onChange) {
+      props.onChange(value);
+    }
+  };
+
   return (
     <CurrencyInput
       prefix="R$ "
       decimalSeparator=","
       groupSeparator="."
       className={cn(wrapper(), props.className)}
-      {...props}
+      value={props.value}
+      onValueChange={handleValueChange}
+      decimalsLimit={2}
+      placeholder={props.placeholder}
     />
   );
 };

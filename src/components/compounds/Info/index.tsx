@@ -1,5 +1,6 @@
 "use client";
 import { Container } from "@/components/primitives";
+import { InfoDataResponse } from "@/interfaces/info";
 import { LAST_CREDIT_DATE, LAST_DEBIT_DATE, data } from "@/mock/info";
 import { formattedDateRange, formattedDate } from "@/utils/date";
 import {
@@ -8,7 +9,11 @@ import {
   CurrencyDollar,
 } from "@phosphor-icons/react";
 
-const calculateBilling = () => {
+interface InfoProps {
+  data: InfoDataResponse[];
+}
+
+const calculateBilling = (data: InfoDataResponse[]) => {
   return data.reduce(
     (groupValue, item) => {
       if (item.type === "credit") {
@@ -23,8 +28,8 @@ const calculateBilling = () => {
   );
 };
 
-export const Info = () => {
-  const { credit, debit, total } = calculateBilling();
+export const Info = ({ data }: InfoProps) => {
+  const { credit, debit, total } = calculateBilling(data);
   return (
     <div className="grid grid-cols-3 gap-6 items-center -mt-16">
       <Container

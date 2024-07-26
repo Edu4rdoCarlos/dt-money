@@ -1,11 +1,16 @@
 "use client";
 import { Table } from "@/components/primitives";
-import { data } from "@/mock/info";
+import { InfoDataResponse } from "@/interfaces/info";
 import { formattedDateSimple } from "@/utils/date";
 import { formatNumber } from "@/utils/number";
 import { cn } from "@/utils/twMerge";
 
-export const Details = () => {
+interface DetailsProps {
+  data?: InfoDataResponse[];
+}
+
+export const Details = ({ data }: DetailsProps) => {
+  if (!data) return <div className="m-auto">Nenhum dado cadastrado</div>;
   return (
     <Table.Root>
       <Table.Thead>
