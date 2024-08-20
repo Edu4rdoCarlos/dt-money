@@ -12,7 +12,6 @@ const HomeLayout = () => {
   const { transactions } = useTransactions();
 
   const isWide = useMedia({ minWidth: "769px" });
-  console.log(isWide);
 
   const formRef = useRef({} as TransactionFormHandlers);
 

@@ -1,5 +1,12 @@
 import { InfoDataResponse } from "@/service/transaction/types";
 
+export const categories = [
+  { id: "venda", name: "Venda" },
+  { id: "alimentação", name: "Alimentação" },
+  { id: "casa", name: "Casa" },
+  { id: "venda", name: "Venda" },
+];
+
 export const data: InfoDataResponse[] = [
   {
     id: "0",
@@ -7,7 +14,7 @@ export const data: InfoDataResponse[] = [
     value: 12000,
     createdAt: "2024-04-13T23:00:00.000Z",
     updatedAt: "2024-04-13T23:00:00.000Z",
-    category: { id: "venda", name: "Venda" },
+    category: categories[0],
     type: "outcome",
   },
   {
@@ -16,7 +23,7 @@ export const data: InfoDataResponse[] = [
     value: 59,
     createdAt: "2024-04-10T23:00:00.000Z",
     updatedAt: "2024-04-10T23:00:00.000Z",
-    category: { id: "alimentação", name: "Alimentação" },
+    category: categories[1],
     type: "income",
   },
   {
@@ -25,7 +32,7 @@ export const data: InfoDataResponse[] = [
     value: 1200,
     createdAt: "2024-04-27T23:00:00.000Z",
     updatedAt: "2024-04-27T23:00:00.000Z",
-    category: { id: "casa", name: "Casa" },
+    category: categories[2],
     type: "income",
   },
   {
@@ -34,7 +41,7 @@ export const data: InfoDataResponse[] = [
     value: 5400,
     createdAt: "2024-04-15T23:00:00.000Z",
     updatedAt: "2024-04-15T23:00:00.000Z",
-    category: { id: "venda", name: "Venda" },
+    category: categories[3],
     type: "outcome",
   },
 ];

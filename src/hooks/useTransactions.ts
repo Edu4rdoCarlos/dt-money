@@ -11,35 +11,44 @@ export interface UpdateTransactionParams {
   transaction: InfoArgs;
 }
 
-export const getTransactions = () => {
-  return useQuery([QUERY_DEFAULT_KEY], () => api.get());
-};
+export const useTransactions2 = () => {
+  const getTransactions = () => {
+    return useQuery([QUERY_DEFAULT_KEY], () => api.get());
+  };
 
-export const getTransactionById = (id: string) => {
-  return useQuery([QUERY_DEFAULT_KEY, id], () => api.getById(id));
-};
+  const getTransactionById = (id: string) => {
+    return useQuery([QUERY_DEFAULT_KEY, id], () => api.getById(id));
+  };
 
-export const createTransaction = () => {
-  const queryClient = useQueryClient();
+  const createTransaction = () => {
+    const queryClient = useQueryClient();
 
-  return useMutation((transaction: InfoArgs) => api.create(transaction), {
-    onSuccess: async () => {
-      try {
-        await queryClient.invalidateQueries(QUERY_DEFAULT_KEY);
-        console.log("Queries invalidated successfully");
-      } catch (error) {
-        console.error("Error invalidating queries:", error);
-      }
-    },
-  });
-};
+    return useMutation((transaction: InfoArgs) => api.create(transaction), {
+      onSuccess: async () => {
+        try {
+          await queryClient.invalidateQueries(QUERY_DEFAULT_KEY);
+          console.log("Queries invalidated successfully");
+        } catch (error) {
+          console.error("Error invalidating queries:", error);
+        }
+      },
+    });
+  };
 
-export const deleteTransaction = () => {
-  const queryClient = useQueryClient();
+  const deleteTransaction = () => {
+    const queryClient = useQueryClient();
 
-  return useMutation((id: string) => api.delete(id), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_DEFAULT_KEY);
-    },
-  });
+    return useMutation((id: string) => api.delete(id), {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QUERY_DEFAULT_KEY);
+      },
+    });
+  };
+
+  return {
+    getTransactionById,
+    getTransactions,
+    createTransaction,
+    deleteTransaction,
+  };
 };

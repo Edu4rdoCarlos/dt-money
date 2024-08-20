@@ -17,6 +17,7 @@ export interface InfoDataResponse {
 
 export interface InfoArgs {
   title: string;
-  price: number;
-  category: number;
+  value: number;
+  category: CategoryResponse;
+  type: InfoType;
 }

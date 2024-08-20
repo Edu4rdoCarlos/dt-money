@@ -5,16 +5,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Dialog, Select } from "@/components/primitives";
 import { InputRadio, Input, InputValue } from "@/components/primitives/Input";
 import { Option } from "@/components/primitives/Select";
-import { categories } from "@/mock/info";
 import { ArrowCircleDown, ArrowCircleUp } from "@phosphor-icons/react";
 import { cn } from "@/utils/twMerge";
-import { InfoDataResponse } from "@/interfaces/info";
-import { useTransactions } from "@/hook/useTransactions";
+import {
+  InfoArgs,
+  InfoDataResponse,
+  InfoType,
+} from "@/service/transaction/types";
+import { categories } from "@/mock/info";
+import { useTransactions2 } from "@/hooks/useTransactions";
 
 const schema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
   price: z.string(),
-  type: z.enum(["credit", "debit"], { message: "Tipo é obrigatório" }),
+  type: z.enum(["outcome", "income"], { message: "Tipo é obrigatório" }),
   category: z.string().min(1, "Categoria é obrigatória"),
 });
 
@@ -34,7 +38,9 @@ export const Transaction = forwardRef<
   TransactionFormHandlers,
   TransactionProps
 >(({ openDialog, onOpenDialog }, ref) => {
-  const { addTransaction } = useTransactions();
+  const { createTransaction } = useTransactions2();
+
+  const addTransaction = createTransaction();
 
   const {
     control,
@@ -46,23 +52,23 @@ export const Transaction = forwardRef<
     resolver: zodResolver(schema),
     defaultValues: {
       name: "",
-      type: "credit",
+      type: "outcome",
       category: "",
     },
   });
 
   const onSubmit = (data: FormValues) => {
-    const info: InfoDataResponse = {
+    const info: InfoArgs = {
       category: {
         id: data.category,
         name: categories.find((item) => item.id === data.category)?.name || "",
       },
-      date: new Date().toISOString(),
+
       title: data.name,
-      type: data.type,
+      type: data.type as InfoType,
       value: Number(data.price),
     };
-    addTransaction(info);
+    addTransaction.mutate(info);
     onOpenDialog(false);
   };
 
@@ -104,12 +110,12 @@ export const Transaction = forwardRef<
                       Entrada
                     </div>
                   }
-                  value="credit"
-                  id="credit"
+                  value="outcome"
+                  id="outcome"
                   name="type"
-                  checked={field.value === "credit"}
-                  className={cn(field.value === "credit" && "!bg-green-50")}
-                  onChange={() => field.onChange("credit")}
+                  checked={field.value === "outcome"}
+                  className={cn(field.value === "outcome" && "!bg-green-50")}
+                  onChange={() => field.onChange("outcome")}
                 />
                 <InputRadio
                   label={
@@ -121,12 +127,12 @@ export const Transaction = forwardRef<
                       Saída
                     </div>
                   }
-                  value="debit"
-                  id="debit"
+                  value="income"
+                  id="income"
                   name="type"
-                  checked={field.value === "debit"}
-                  className={cn(field.value === "debit" && "!bg-red-50")}
-                  onChange={() => field.onChange("debit")}
+                  checked={field.value === "income"}
+                  className={cn(field.value === "income" && "!bg-red-50")}
+                  onChange={() => field.onChange("income")}
                 />
               </>
             )}

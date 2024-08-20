@@ -1,6 +1,6 @@
 "use client";
 import { Table } from "@/components/primitives";
-import { InfoDataResponse } from "@/interfaces/info";
+import { InfoDataResponse } from "@/service/transaction/types";
 import { formattedDateSimple } from "@/utils/date";
 import { formatValue } from "@/utils/number";
 import { cn } from "@/utils/twMerge";
@@ -27,7 +27,7 @@ export const DetailsDesktop = ({ data }: DetailsProps) => {
               <td
                 className={cn(
                   "w-2/12",
-                  item.type === "credit"
+                  item.type === "outcome"
                     ? "!text-positive-200"
                     : "!text-destructive-400 before:content-['-']"
                 )}
@@ -36,7 +36,7 @@ export const DetailsDesktop = ({ data }: DetailsProps) => {
               </td>
               <td className="w-2/12">{item.category.name}</td>
               <td className="w-1/12 rounded-e">
-                {formattedDateSimple({ date: new Date(item.date) })}
+                {formattedDateSimple({ date: new Date(item.createdAt) })}
               </td>
             </tr>
           );
