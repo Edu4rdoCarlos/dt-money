@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
+"use client";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/utils/twMerge";
+const queryClient = new QueryClient();
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "600", "700"],
 });
-
-export const metadata: Metadata = {
-  title: "DT Money",
-  description: "Billing money through activity registrations",
-};
 
 export default function RootLayout({
   children,
@@ -21,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(poppins.className, "bg-gray-200/80")}>
-        {children}
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
       </body>
     </html>
   );

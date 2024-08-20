@@ -1,5 +1,5 @@
-import { InfoDataResponse } from "@/interfaces/info";
 import { data } from "@/mock/info";
+import { InfoDataResponse } from "@/service/transaction/types";
 import { atom, useAtom } from "jotai";
 
 export const transactionsAtom = atom<InfoDataResponse[]>(data);
