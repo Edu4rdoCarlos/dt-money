@@ -1,15 +1,11 @@
 import { Button } from "@/components/primitives";
-import { InfoDataResponse } from "@/service/transaction/types";
 import { formattedDateSimple } from "@/utils/date";
 import { formatValue } from "@/utils/number";
 import { cn } from "@/utils/twMerge";
 import { NotePencil, Trash } from "@phosphor-icons/react";
+import { DetailsProps } from "./types";
 
-interface DetailsMobileProps {
-  data: InfoDataResponse[];
-}
-
-export const DetailsMobile = ({ data }: DetailsMobileProps) => {
+export const DetailsMobile = ({ data }: DetailsProps) => {
   if (!data) return <div className="m-auto">Nenhum dado cadastrado</div>;
 
   return (
@@ -20,8 +16,6 @@ export const DetailsMobile = ({ data }: DetailsMobileProps) => {
       </div>
       <div className="flex flex-col gap-2">
         {data.map((item) => {
-          console.log("data", item.category.name);
-
           return (
             <div className="bg-white rounded-lg p-4" key={item.title}>
               <div className="flex items-start justify-between">

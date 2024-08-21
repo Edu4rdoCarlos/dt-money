@@ -1,14 +1,10 @@
 "use client";
 import { Button, Table } from "@/components/primitives";
-import { InfoDataResponse } from "@/service/transaction/types";
 import { formattedDateSimple } from "@/utils/date";
 import { formatValue } from "@/utils/number";
 import { cn } from "@/utils/twMerge";
 import { NotePencil, Trash } from "@phosphor-icons/react";
-
-interface DetailsProps {
-  data?: InfoDataResponse[];
-}
+import { DetailsProps } from "./types";
 
 export const DetailsDesktop = ({ data }: DetailsProps) => {
   if (!data) return <div className="m-auto">Nenhum dado cadastrado</div>;

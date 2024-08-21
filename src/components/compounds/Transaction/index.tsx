@@ -7,13 +7,8 @@ import { InputRadio, Input, InputValue } from "@/components/primitives/Input";
 import { Option } from "@/components/primitives/Select";
 import { ArrowCircleDown, ArrowCircleUp } from "@phosphor-icons/react";
 import { cn } from "@/utils/twMerge";
-import {
-  InfoArgs,
-  InfoDataResponse,
-  InfoType,
-} from "@/service/transaction/types";
+import { InfoArgs, InfoType } from "@/service/transaction/types";
 import { categories } from "@/mock/info";
-import { useTransactions2 } from "@/hooks/useTransactions";
 
 const schema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
@@ -38,10 +33,6 @@ export const Transaction = forwardRef<
   TransactionFormHandlers,
   TransactionProps
 >(({ openDialog, onOpenDialog }, ref) => {
-  const { createTransaction } = useTransactions2();
-
-  const addTransaction = createTransaction();
-
   const {
     control,
     handleSubmit,
@@ -68,7 +59,7 @@ export const Transaction = forwardRef<
       type: data.type as InfoType,
       value: Number(data.price),
     };
-    addTransaction.mutate(info);
+    // addTransaction.mutate(info);
     onOpenDialog(false);
   };
 

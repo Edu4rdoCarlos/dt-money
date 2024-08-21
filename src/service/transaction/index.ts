@@ -1,7 +1,7 @@
 import { api } from "../api";
 import { InfoDataResponse, InfoArgs } from "./types";
 
-const endpoint = "/api/transaction";
+const endpoint = "/api/transactions";
 
 export class ApiTransaction {
   private readonly endpoint: string = endpoint;
@@ -28,9 +28,7 @@ export class ApiTransaction {
   };
 
   delete = async (id: string) => {
-    const { data } = await api.delete<InfoDataResponse>(
-      `${this.endpoint}/${id}`
-    );
+    const { data } = await api.delete<boolean>(`${this.endpoint}/${id}`);
     return data;
   };
 }
