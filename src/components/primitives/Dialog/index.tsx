@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-interface DialogProps extends Props {
+export interface DialogProps extends Props {
   open: boolean;
   onOpenChange: (value: boolean) => void;
 }
@@ -39,7 +39,7 @@ const Dialog = ({ open, children, onOpenChange }: DialogProps) => {
   return (
     <>
       {open && (
-        <div className="md:fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 h-screen absolute">
+        <div className="md:fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 h-full absolute">
           <div className="bg-gray-50 rounded-t-3xl md:rounded shadow-xl max-w-xl w-full md:relative absolute bottom-0">
             <button
               className="text-gray-500 hover:text-gray-700 focus:outline-none absolute right-4 top-4"
