@@ -15,6 +15,9 @@ const buttonVariants = tv({
       primary: {
         wrapper: "bg-primary-300 hover:bg-primary-300/80 text-white",
       },
+      gray: {
+        wrapper: "bg-primary-100/20 hover:bg-primary-100/10 text-black",
+      },
     },
   },
   defaultVariants: {

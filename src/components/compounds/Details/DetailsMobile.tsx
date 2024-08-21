@@ -1,7 +1,9 @@
+import { Button } from "@/components/primitives";
 import { InfoDataResponse } from "@/service/transaction/types";
 import { formattedDateSimple } from "@/utils/date";
 import { formatValue } from "@/utils/number";
 import { cn } from "@/utils/twMerge";
+import { NotePencil, Trash } from "@phosphor-icons/react";
 
 interface DetailsMobileProps {
   data: InfoDataResponse[];
@@ -22,19 +24,33 @@ export const DetailsMobile = ({ data }: DetailsMobileProps) => {
 
           return (
             <div className="bg-white rounded-lg p-4" key={item.title}>
-              <div className="flex gap-1 flex-col mb-5">
-                <div className="text-primary-800 font-medium text-sm">
-                  {item.title}
+              <div className="flex items-start justify-between">
+                <div className="flex gap-1 flex-col mb-5">
+                  <div className="text-primary-800 font-medium text-sm">
+                    {item.title}
+                  </div>
+                  <div
+                    className={cn(
+                      "text-lg",
+                      item.type === "income"
+                        ? "!text-positive-200"
+                        : "!text-destructive-400 before:content-['-']"
+                    )}
+                  >
+                    {formatValue(item.value)}
+                  </div>
                 </div>
-                <div
-                  className={cn(
-                    "text-lg",
-                    item.type === "income"
-                      ? "!text-positive-200"
-                      : "!text-destructive-400 before:content-['-']"
-                  )}
-                >
-                  {formatValue(item.value)}
+                <div className="gap-2 flex items-center justify-center">
+                  <Button onClick={() => void 0} className="p-3 w-fit">
+                    <NotePencil size={18} />
+                  </Button>
+                  <Button
+                    colorScheme="gray"
+                    onClick={() => void 0}
+                    className="p-3 w-fit"
+                  >
+                    <Trash size={18} />
+                  </Button>
                 </div>
               </div>
               <div className="flex justify-between w-full text-gray-400/80 font-light text-sm">

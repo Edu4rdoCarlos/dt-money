@@ -19,7 +19,7 @@ export const DetailsDesktop = ({ data }: DetailsProps) => {
         <th>Preço</th>
         <th>Categoria</th>
         <th>Data</th>
-        <th>Ações</th>
+        <th className="!pl-20">Ações</th>
       </Table.Thead>
       <Table.Tbody>
         {data.map((item) => {
@@ -46,7 +46,11 @@ export const DetailsDesktop = ({ data }: DetailsProps) => {
                 <Button onClick={() => void 0} className="p-3 w-fit">
                   <NotePencil size={18} />
                 </Button>
-                <Button onClick={() => void 0} className="p-3 w-fit">
+                <Button
+                  colorScheme="gray"
+                  onClick={() => void 0}
+                  className="p-3 w-fit"
+                >
                   <Trash size={18} />
                 </Button>
               </td>
