@@ -18,6 +18,6 @@ export interface InfoDataResponse {
 export interface InfoArgs {
   title: string;
   value: number;
-  category: CategoryResponse;
+  categoryId: string;
   type: InfoType;
 }

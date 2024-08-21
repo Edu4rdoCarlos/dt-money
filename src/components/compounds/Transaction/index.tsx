@@ -9,7 +9,6 @@ import { ArrowCircleDown, ArrowCircleUp } from "@phosphor-icons/react";
 import { cn } from "@/utils/twMerge";
 import { InfoArgs, InfoType } from "@/service/transaction/types";
 import { categories } from "@/mock/info";
-import { UseMutationResult } from "react-query";
 
 const schema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
@@ -52,11 +51,7 @@ export const Transaction = forwardRef<
 
   const onSubmit = (data: FormValues) => {
     const info: InfoArgs = {
-      category: {
-        id: data.category,
-        name: categories.find((item) => item.id === data.category)?.name || "",
-      },
-
+      categoryId: data.category,
       title: data.name,
       type: data.type as InfoType,
       value: Number(data.price),

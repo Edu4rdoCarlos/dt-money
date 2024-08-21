@@ -1,10 +1,9 @@
 import { InfoDataResponse } from "@/service/transaction/types";
 
 export const categories = [
-  { id: "venda", name: "Venda" },
-  { id: "alimentação", name: "Alimentação" },
-  { id: "casa", name: "Casa" },
-  { id: "venda", name: "Venda" },
+  { id: "c5177a12-26b8-4f1a-9a3c-934f40bfc869", name: "Alimentação" },
+  { id: "a723ad14-1650-4028-9087-51c70d534153", name: "Casa" },
+  { id: "0f159692-0537-4670-a8a4-3d08b7a4043b", name: "Venda" },
 ];
 
 export const data: InfoDataResponse[] = [

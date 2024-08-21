@@ -15,7 +15,7 @@ import { InfoArgs } from "@/service/transaction/types";
 
 const HomeLayout = () => {
   const [open, setOpen] = useState(false);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(true);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const { data: transactions } = useGetTransactions();
   const createTransaction = useCreateTransaction();
