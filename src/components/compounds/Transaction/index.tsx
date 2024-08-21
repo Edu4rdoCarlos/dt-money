@@ -9,6 +9,8 @@ import { ArrowCircleDown, ArrowCircleUp } from "@phosphor-icons/react";
 import { cn } from "@/utils/twMerge";
 import { InfoArgs, InfoType } from "@/service/transaction/types";
 import { categories } from "@/mock/info";
+import { useTransactionDialog } from "@/hooks/useTransactionDialog";
+import useTransactionStore from "@/store/useTransactionStore";
 
 const schema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
@@ -25,15 +27,16 @@ export interface TransactionFormHandlers {
 }
 
 interface TransactionProps {
-  openDialog: boolean;
-  onOpenDialog: (value: boolean) => void;
   onSubmitTransaction: (data: InfoArgs, id?: string) => void;
 }
 
 export const Transaction = forwardRef<
   TransactionFormHandlers,
   TransactionProps
->(({ openDialog, onOpenDialog, onSubmitTransaction }, ref) => {
+>(({ onSubmitTransaction }, ref) => {
+  const { open, setOpen } = useTransactionDialog();
+  const id = "";
+
   const {
     control,
     handleSubmit,
@@ -56,8 +59,8 @@ export const Transaction = forwardRef<
       type: data.type as InfoType,
       value: Number(data.price),
     };
-    onSubmitTransaction(info);
-    onOpenDialog(false);
+    onSubmitTransaction(info, id);
+    setOpen(false);
   };
 
   useImperativeHandle(ref, () => ({
@@ -65,9 +68,13 @@ export const Transaction = forwardRef<
     getData: () => getValues(),
   }));
 
+  const { transactionType } = useTransactionStore();
+
+  const label = transactionType === "create" ? "Cadastrar" : "Atualizar";
+
   return (
-    <Dialog.Root open={openDialog} onOpenChange={onOpenDialog}>
-      <Dialog.Header>Cadastrar transação</Dialog.Header>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Header>{label} transação</Dialog.Header>
       <Dialog.Content>
         <Controller
           name="name"
@@ -154,7 +161,7 @@ export const Transaction = forwardRef<
           onClick={handleSubmit(onSubmit)}
           colorScheme="positive"
         >
-          Cadastrar
+          {label}
         </Button>
       </Dialog.Footer>
     </Dialog.Root>

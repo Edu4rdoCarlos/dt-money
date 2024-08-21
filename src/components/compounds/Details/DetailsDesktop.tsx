@@ -8,6 +8,8 @@ import { DetailsProps } from "./types";
 import { ConfirmDeletDialog } from "./ConfirmDeleteDialog";
 import { useState } from "react";
 import { useDeleteTransaction } from "@/hooks/useTransactions";
+import { useTransactionDialog } from "@/hooks/useTransactionDialog";
+import useTransactionStore from "@/store/useTransactionStore";
 
 export const DetailsDesktop = ({
   data,
@@ -15,6 +17,9 @@ export const DetailsDesktop = ({
   openDialog,
 }: DetailsProps) => {
   const [transactionId, setTransactionId] = useState("");
+  const { setOpen } = useTransactionDialog();
+  const { setTransactionType } = useTransactionStore();
+
   if (!data) return <div className="m-auto">Nenhum dado cadastrado</div>;
 
   const deleteTransaction = useDeleteTransaction();
@@ -66,7 +71,13 @@ export const DetailsDesktop = ({
                   {formattedDateSimple({ date: new Date(item.createdAt) })}
                 </td>
                 <td className="gap-2 flex items-center justify-center">
-                  <Button onClick={() => void 0} className="p-3 w-fit">
+                  <Button
+                    onClick={() => {
+                      setTransactionType("update");
+                      setOpen(true);
+                    }}
+                    className="p-3 w-fit"
+                  >
                     <NotePencil size={18} />
                   </Button>
                   <Button

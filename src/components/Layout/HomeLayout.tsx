@@ -14,7 +14,6 @@ import useTransactionStore from "@/store/useTransactionStore";
 import { InfoArgs } from "@/service/transaction/types";
 
 const HomeLayout = () => {
-  const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const { data: transactions } = useGetTransactions();
@@ -44,7 +43,7 @@ const HomeLayout = () => {
 
   return (
     <>
-      <Header handleOpenDialog={() => setOpen(true)} />
+      <Header />
       <div className="max-w-5xl mx-auto flex flex-col gap-14 md:gap-20">
         <Info data={transactions || []} />
         {isWide ? (
@@ -62,8 +61,6 @@ const HomeLayout = () => {
         )}
         <Transaction
           ref={formRef}
-          openDialog={open}
-          onOpenDialog={setOpen}
           onSubmitTransaction={handleSubmitTransaction}
         />
       </div>

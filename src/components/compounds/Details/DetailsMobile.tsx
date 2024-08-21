@@ -7,6 +7,8 @@ import { DetailsProps } from "./types";
 import { useState } from "react";
 import { useDeleteTransaction } from "@/hooks/useTransactions";
 import { ConfirmDeletDialog } from "./ConfirmDeleteDialog";
+import { useTransactionDialog } from "@/hooks/useTransactionDialog";
+import useTransactionStore from "@/store/useTransactionStore";
 
 export const DetailsMobile = ({
   data,
@@ -17,6 +19,7 @@ export const DetailsMobile = ({
   if (!data) return <div className="m-auto">Nenhum dado cadastrado</div>;
 
   const deleteTransaction = useDeleteTransaction();
+  const { setOpen } = useTransactionDialog();
 
   const handleDeleteButton = (id: string) => {
     setTransactionId(id);
@@ -28,6 +31,9 @@ export const DetailsMobile = ({
     await deleteTransaction.mutate(transactionId);
     onOpenDialogChange(false);
   };
+
+  const { setTransactionType } = useTransactionStore();
+
   return (
     <>
       <ConfirmDeletDialog
@@ -61,7 +67,13 @@ export const DetailsMobile = ({
                     </div>
                   </div>
                   <div className="gap-2 flex items-center justify-center">
-                    <Button onClick={() => void 0} className="p-3 w-fit">
+                    <Button
+                      onClick={() => {
+                        setTransactionType("update");
+                        setOpen(true);
+                      }}
+                      className="p-3 w-fit"
+                    >
                       <NotePencil size={18} />
                     </Button>
                     <Button

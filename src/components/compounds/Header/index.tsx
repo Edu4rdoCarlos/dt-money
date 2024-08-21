@@ -3,17 +3,15 @@
 import { Button } from "@/components/primitives";
 import { Logo } from "./Logo";
 import useTransactionStore from "@/store/useTransactionStore";
+import { useTransactionDialog } from "@/hooks/useTransactionDialog";
 
-interface HeaderProps {
-  handleOpenDialog: () => void;
-}
-
-export const Header = ({ handleOpenDialog }: HeaderProps) => {
+export const Header = () => {
   const { setTransactionType } = useTransactionStore();
+  const { setOpen } = useTransactionDialog();
 
   const handleNewTransaction = () => {
     setTransactionType("create");
-    handleOpenDialog();
+    setOpen(true);
   };
   return (
     <header className="bg-primary-400 pt-8 md:min-h-44 min-h-52 px-4">
