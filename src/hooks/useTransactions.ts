@@ -38,7 +38,7 @@ export const useUpdateTransaction = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({ id, transaction }: UpdateTransactionParams) =>
+    ({ id, transaction }: { id: string; transaction: InfoArgs }) =>
       api.update(id, transaction),
     {
       onSuccess: async () => {

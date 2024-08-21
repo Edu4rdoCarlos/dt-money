@@ -9,6 +9,7 @@ import { ArrowCircleDown, ArrowCircleUp } from "@phosphor-icons/react";
 import { cn } from "@/utils/twMerge";
 import { InfoArgs, InfoType } from "@/service/transaction/types";
 import { categories } from "@/mock/info";
+import { UseMutationResult } from "react-query";
 
 const schema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
@@ -27,12 +28,13 @@ export interface TransactionFormHandlers {
 interface TransactionProps {
   openDialog: boolean;
   onOpenDialog: (value: boolean) => void;
+  onSubmitTransaction: (data: InfoArgs, id?: string) => void;
 }
 
 export const Transaction = forwardRef<
   TransactionFormHandlers,
   TransactionProps
->(({ openDialog, onOpenDialog }, ref) => {
+>(({ openDialog, onOpenDialog, onSubmitTransaction }, ref) => {
   const {
     control,
     handleSubmit,
@@ -59,7 +61,7 @@ export const Transaction = forwardRef<
       type: data.type as InfoType,
       value: Number(data.price),
     };
-    // addTransaction.mutate(info);
+    onSubmitTransaction(info);
     onOpenDialog(false);
   };
 

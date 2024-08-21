@@ -5,17 +5,36 @@ import { Header } from "../compounds/Header";
 import { Info } from "../compounds/Info";
 import { Transaction, TransactionFormHandlers } from "../compounds/Transaction";
 import { useMedia } from "use-media";
-import { useGetTransactions } from "@/hooks/useTransactions";
+import {
+  useCreateTransaction,
+  useGetTransactions,
+  useUpdateTransaction,
+} from "@/hooks/useTransactions";
+import useTransactionStore from "@/store/useTransactionStore";
+import { InfoArgs } from "@/service/transaction/types";
 
 const HomeLayout = () => {
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(true);
 
   const { data: transactions } = useGetTransactions();
+  const createTransaction = useCreateTransaction();
+  const updateTransaction = useUpdateTransaction();
 
   const isWide = useMedia({ minWidth: "769px" });
 
   const formRef = useRef({} as TransactionFormHandlers);
+
+  const { transactionType } = useTransactionStore();
+
+  const handleSubmitTransaction = (transaction: InfoArgs, id?: string) => {
+    if (transactionType === "create") {
+      createTransaction.mutate(transaction);
+    }
+    if (id) {
+      updateTransaction.mutate({ id, transaction });
+    }
+  };
 
   useEffect(() => {
     if (!isWide) return;
@@ -41,7 +60,12 @@ const HomeLayout = () => {
             openDialog={openDeleteDialog}
           />
         )}
-        <Transaction ref={formRef} openDialog={open} onOpenDialog={setOpen} />
+        <Transaction
+          ref={formRef}
+          openDialog={open}
+          onOpenDialog={setOpen}
+          onSubmitTransaction={handleSubmitTransaction}
+        />
       </div>
     </>
   );
