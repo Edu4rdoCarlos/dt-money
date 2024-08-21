@@ -22,6 +22,12 @@ export class DefaultApi<T> {
     return data;
   };
 
+  update = async (formData: T): Promise<T> => {
+    const id = (formData as any)[this.resourceId];
+    const { data } = await api.put<T>(`${this.endpoint}/${id}`, formData);
+    return data;
+  };
+
   delete = async (id: string): Promise<T> => {
     const { data } = await api.delete<T>(`${this.endpoint}/${id}`);
     return data;

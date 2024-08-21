@@ -27,6 +27,17 @@ export class ApiTransaction {
     return data;
   };
 
+  update = async (
+    id: string,
+    formData: InfoArgs
+  ): Promise<InfoDataResponse> => {
+    const { data } = await api.put<InfoDataResponse>(
+      `${this.endpoint}/${id}`,
+      formData
+    );
+    return data;
+  };
+
   delete = async (id: string) => {
     const { data } = await api.delete<boolean>(`${this.endpoint}/${id}`);
     return data;

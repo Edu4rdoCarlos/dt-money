@@ -34,6 +34,25 @@ export const useCreateTransaction = () => {
   });
 };
 
+export const useUpdateTransaction = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    ({ id, transaction }: UpdateTransactionParams) =>
+      api.update(id, transaction),
+    {
+      onSuccess: async () => {
+        try {
+          await queryClient.invalidateQueries(QUERY_DEFAULT_KEY);
+          console.log("Queries invalidated successfully");
+        } catch (error) {
+          console.error("Error invalidating queries:", error);
+        }
+      },
+    }
+  );
+};
+
 export const useDeleteTransaction = () => {
   const queryClient = useQueryClient();
 
