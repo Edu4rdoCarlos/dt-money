@@ -15,7 +15,7 @@ export const data: InfoDataResponse[] = [
     createdAt: "2024-04-13T23:00:00.000Z",
     updatedAt: "2024-04-13T23:00:00.000Z",
     category: categories[0],
-    type: "outcome",
+    type: "income",
   },
   {
     id: "1",
@@ -24,7 +24,7 @@ export const data: InfoDataResponse[] = [
     createdAt: "2024-04-10T23:00:00.000Z",
     updatedAt: "2024-04-10T23:00:00.000Z",
     category: categories[1],
-    type: "income",
+    type: "outcome",
   },
   {
     id: "2",
@@ -33,7 +33,7 @@ export const data: InfoDataResponse[] = [
     createdAt: "2024-04-27T23:00:00.000Z",
     updatedAt: "2024-04-27T23:00:00.000Z",
     category: categories[2],
-    type: "income",
+    type: "outcome",
   },
   {
     id: "3",
@@ -42,9 +42,9 @@ export const data: InfoDataResponse[] = [
     createdAt: "2024-04-15T23:00:00.000Z",
     updatedAt: "2024-04-15T23:00:00.000Z",
     category: categories[3],
-    type: "outcome",
+    type: "income",
   },
 ];
 
-export const LAST_OUTCOME_DATE = new Date(2024, 3, 1);
-export const LAST_INCOME_DATE = new Date(2024, 3, 30);
+export const LAST_INCOME_DATE = new Date(2024, 3, 1);
+export const LAST_OUTCOME_DATE = new Date(2024, 3, 30);

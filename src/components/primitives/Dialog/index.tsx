@@ -18,7 +18,7 @@ const Header = ({ children, className }: Props) => {
   return (
     <div className={cn("flex justify-between items-center mb-6", className)}>
       {typeof children === "string" ? (
-        <h2 className="text-[1.5rem] text-accent-800 font-semibold tracking-normal">
+        <h2 className="text-[1.5rem] text-primary-800 font-semibold tracking-normal">
           {children}
         </h2>
       ) : (

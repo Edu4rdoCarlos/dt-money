@@ -1,11 +1,11 @@
 import type { Config } from "tailwindcss";
 
-const accent = {
+const primary = {
   100: "#969Cb2",
   300: "#6933FF",
   400: "#5429cc",
   800: "#363f5f",
-  default: "var(--color-accent)",
+  default: "var(--color-primary)",
 };
 
 const destructive = {
@@ -39,7 +39,7 @@ const config: Config = {
       colors: {
         positive: { ...positive, DEFAULT: positive["default"] },
         destructive: { ...destructive, DEFAULT: destructive["default"] },
-        accent: { ...accent, DEFAULT: accent["default"] },
+        primary: { ...primary, DEFAULT: primary["default"] },
       },
     },
   },

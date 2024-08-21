@@ -1,8 +1,8 @@
 import { CategoryResponse } from "../category/types";
 
 export enum InfoType {
-  INCOME = "income",
   OUTCOME = "outcome",
+  INCOME = "income",
 }
 
 export interface InfoDataResponse {

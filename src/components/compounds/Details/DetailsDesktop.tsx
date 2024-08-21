@@ -1,9 +1,10 @@
 "use client";
-import { Table } from "@/components/primitives";
+import { Button, Table } from "@/components/primitives";
 import { InfoDataResponse } from "@/service/transaction/types";
 import { formattedDateSimple } from "@/utils/date";
 import { formatValue } from "@/utils/number";
 import { cn } from "@/utils/twMerge";
+import { NotePencil, Trash } from "@phosphor-icons/react";
 
 interface DetailsProps {
   data?: InfoDataResponse[];
@@ -18,16 +19,19 @@ export const DetailsDesktop = ({ data }: DetailsProps) => {
         <th>Preço</th>
         <th>Categoria</th>
         <th>Data</th>
+        <th>Ações</th>
       </Table.Thead>
       <Table.Tbody>
         {data.map((item) => {
           return (
             <tr key={item.title}>
-              <td className="!text-accent-800 w-2/6 rounded-s">{item.title}</td>
+              <td className="!text-primary-800 w-2/6 rounded-s">
+                {item.title}
+              </td>
               <td
                 className={cn(
                   "w-2/12",
-                  item.type === "outcome"
+                  item.type === "income"
                     ? "!text-positive-200"
                     : "!text-destructive-400 before:content-['-']"
                 )}
@@ -37,6 +41,14 @@ export const DetailsDesktop = ({ data }: DetailsProps) => {
               <td className="w-2/12">{item.category.name}</td>
               <td className="w-1/12 rounded-e">
                 {formattedDateSimple({ date: new Date(item.createdAt) })}
+              </td>
+              <td className="gap-2 flex items-center justify-center">
+                <Button onClick={() => void 0} className="p-3 w-fit">
+                  <NotePencil size={18} />
+                </Button>
+                <Button onClick={() => void 0} className="p-3 w-fit">
+                  <Trash size={18} />
+                </Button>
               </td>
             </tr>
           );

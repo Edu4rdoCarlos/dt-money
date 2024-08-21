@@ -13,7 +13,7 @@ export const DetailsMobile = ({ data }: DetailsMobileProps) => {
   return (
     <div className="px-6">
       <div className="flex justify-between items-center w-full mb-4">
-        <h2 className="text-accent-800 text-xl">Listagem</h2>
+        <h2 className="text-primary-800 text-xl">Listagem</h2>
         <span className="text-gray-400 font-light">{data.length} items</span>
       </div>
       <div className="flex flex-col gap-2">
@@ -23,13 +23,13 @@ export const DetailsMobile = ({ data }: DetailsMobileProps) => {
           return (
             <div className="bg-white rounded-lg p-4" key={item.title}>
               <div className="flex gap-1 flex-col mb-5">
-                <div className="text-accent-800 font-medium text-sm">
+                <div className="text-primary-800 font-medium text-sm">
                   {item.title}
                 </div>
                 <div
                   className={cn(
                     "text-lg",
-                    item.type === "outcome"
+                    item.type === "income"
                       ? "!text-positive-200"
                       : "!text-destructive-400 before:content-['-']"
                   )}

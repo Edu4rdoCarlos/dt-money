@@ -12,13 +12,13 @@ const buttonVariants = tv({
       positive: {
         wrapper: "bg-positive-200 hover:bg-positive-200/80 text-white",
       },
-      accent: {
-        wrapper: "bg-accent-300 hover:bg-accent-300/80 text-white",
+      primary: {
+        wrapper: "bg-primary-300 hover:bg-primary-300/80 text-white",
       },
     },
   },
   defaultVariants: {
-    colorScheme: "accent",
+    colorScheme: "primary",
   },
 });
 

@@ -17,7 +17,7 @@ interface CurrencyInputProps {
 const inputVariants = tv({
   slots: {
     wrapper:
-      "py-4 rounded text-sm bg-gray-200/40 border border-gray-200 w-full font-light px-5 focus:outline-accent-400/10",
+      "py-4 rounded text-sm bg-gray-200/40 border border-gray-200 w-full font-light px-5 focus:outline-primary-400/10",
     radio:
       "font-light text-sm py-4 rounded border border-gray-200 w-full px-5 cursor-pointer select-none",
   },

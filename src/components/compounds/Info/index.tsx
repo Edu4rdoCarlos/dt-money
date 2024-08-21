@@ -1,7 +1,7 @@
 "use client";
 import { Container } from "@/components/primitives";
-import { InfoDataResponse } from "@/interfaces/info";
-import { LAST_OUTCOME_DATE, LAST_INCOME_DATE, data } from "@/mock/info";
+import { LAST_INCOME_DATE, LAST_OUTCOME_DATE, data } from "@/mock/info";
+import { InfoDataResponse } from "@/service/transaction/types";
 import { formattedDateRange, formattedDate } from "@/utils/date";
 import {
   ArrowCircleDown,
@@ -16,37 +16,37 @@ interface InfoProps {
 const calculateBilling = (data: InfoDataResponse[]) => {
   return data.reduce(
     (groupValue, item) => {
-      if (item.type === "outcome") {
-        groupValue.outcome += item.value;
-      } else if (item.type === "income") {
+      if (item.type === "income") {
         groupValue.income += item.value;
+      } else if (item.type === "outcome") {
+        groupValue.outcome += item.value;
       }
-      groupValue.total = groupValue.outcome - groupValue.income;
+      groupValue.total = groupValue.income - groupValue.outcome;
       return groupValue;
     },
-    { outcome: 0, income: 0, total: 0 }
+    { income: 0, outcome: 0, total: 0 }
   );
 };
 
 export const Info = ({ data }: InfoProps) => {
-  const { outcome, income, total } = calculateBilling(data);
+  const { income, outcome, total } = calculateBilling(data);
   return (
     <div className="md:grid md:grid-cols-3 gap-6 items-center -mt-16 flex w-full overflow-x-auto md:p-0 px-6 pb-1">
       <Container
         title={"Entradas"}
-        value={outcome}
+        value={income}
         icon={<ArrowCircleUp className="text-positive-200" size={28} />}
         date={formattedDate({
-          date: LAST_OUTCOME_DATE,
+          date: LAST_INCOME_DATE,
           label: "'ultima entrada dia' dd 'de' MMMM",
         })}
       />
       <Container
         title={"Saidas"}
-        value={income}
+        value={outcome}
         icon={<ArrowCircleDown className="text-destructive-400" size={28} />}
         date={formattedDate({
-          date: LAST_INCOME_DATE,
+          date: LAST_OUTCOME_DATE,
           label: "'ultima saida dia' dd 'de' MMMM",
         })}
       />
@@ -56,8 +56,8 @@ export const Info = ({ data }: InfoProps) => {
         colorScheme="positive"
         icon={<CurrencyDollar className="text-white" size={24} />}
         date={formattedDateRange({
-          startDate: LAST_OUTCOME_DATE,
-          endDate: LAST_INCOME_DATE,
+          startDate: LAST_INCOME_DATE,
+          endDate: LAST_OUTCOME_DATE,
         })}
       />
     </div>

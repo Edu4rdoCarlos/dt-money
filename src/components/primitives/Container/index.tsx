@@ -14,8 +14,8 @@ const containerVariant = tv({
   slots: {
     sWrapper:
       "py-5 px-6 rounded-md bg-white w-full flex flex-col justify-between gap-1 md:min-h-full md:min-h-full min-h-36 min-w-72",
-    sValue: "text-[1.7rem] font-medium text-black/75 text-accent-800",
-    sTitle: "font-light text-[0.8rem] text-accent-800",
+    sValue: "text-[1.7rem] font-medium text-black/75 text-primary-800",
+    sTitle: "font-light text-[0.8rem] text-primary-800",
     sDate: "text-gray-400 text-xs font-light",
   },
   variants: {

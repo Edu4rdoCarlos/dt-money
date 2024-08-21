@@ -18,7 +18,7 @@ import { useTransactions2 } from "@/hooks/useTransactions";
 const schema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
   price: z.string(),
-  type: z.enum(["outcome", "income"], { message: "Tipo é obrigatório" }),
+  type: z.enum(["income", "outcome"], { message: "Tipo é obrigatório" }),
   category: z.string().min(1, "Categoria é obrigatória"),
 });
 
@@ -52,7 +52,7 @@ export const Transaction = forwardRef<
     resolver: zodResolver(schema),
     defaultValues: {
       name: "",
-      type: "outcome",
+      type: "income",
       category: "",
     },
   });
@@ -110,12 +110,12 @@ export const Transaction = forwardRef<
                       Entrada
                     </div>
                   }
-                  value="outcome"
-                  id="outcome"
+                  value="income"
+                  id="income"
                   name="type"
-                  checked={field.value === "outcome"}
-                  className={cn(field.value === "outcome" && "!bg-green-50")}
-                  onChange={() => field.onChange("outcome")}
+                  checked={field.value === "income"}
+                  className={cn(field.value === "income" && "!bg-green-50")}
+                  onChange={() => field.onChange("income")}
                 />
                 <InputRadio
                   label={
@@ -127,12 +127,12 @@ export const Transaction = forwardRef<
                       Saída
                     </div>
                   }
-                  value="income"
-                  id="income"
+                  value="outcome"
+                  id="outcome"
                   name="type"
-                  checked={field.value === "income"}
-                  className={cn(field.value === "income" && "!bg-red-50")}
-                  onChange={() => field.onChange("income")}
+                  checked={field.value === "outcome"}
+                  className={cn(field.value === "outcome" && "!bg-red-50")}
+                  onChange={() => field.onChange("outcome")}
                 />
               </>
             )}
